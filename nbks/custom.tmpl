@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="observable.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+      @import url("observable:styles/index.css");
+      @import url("@fontsource-variable/inter/wght.css");
+      @import url("@fontsource-variable/inter/wght-italic.css");
+      @import url("@fontsource-variable/source-serif-4/wght.css");
+      @import url("@fontsource-variable/source-serif-4/wght-italic.css");
+      @import url("@fontsource-variable/spline-sans-mono/wght.css");
+      @import url("@fontsource-variable/spline-sans-mono/wght-italic.css");
+      @import url("@fontsource-variable/nunito-sans/full.css");
+      /* padding and borders count inside an element's width/height; without this, width:100% plus padding/border overflows its container */
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+      /* force no top margin on every element except the html tag, which keeps a small margin (set below) */
+      *:not(html) {
+        margin-top:0 !important;
+      }
+      /* every cell's wrapper div gets Observable's default cell margin (17px 0); this project never relies on that spacing (each page has at most one visible content cell), so it's collapsed everywhere rather than just on empty/hidden cells, which is fragile (:empty only matches a cell with zero child nodes, including no whitespace text nodes) */
+      .observablehq--cell {
+        margin: 0;
+      }
+      /* edit your backgound colors
+        these colors are intended to show you where the elements are
+        and how to configure them */
+      html {
+        /* background-color: #111111; */
+        margin:0 0 0 0;
+        margin-top:1vw; /* very small margin above the whole page; no other side */
+        padding:0; /* change this to override template default */
+        border:0;
+      }
+      /* and edit this for body properties */
+      body {
+        /* background-color: gray; */
+        max-width: none;
+        margin:0;
+        padding:0; /* change this to override template default */
+        border:0;
+      }
+      main {
+        /* background-color: red; */
+        max-width: none;
+        margin:0;
+        padding:0; /* change this to override template default */
+        border:0;
+      }
+      /* from THIS LAST globalstyle.css */
+      html, body { background-color: var(--body-background); }
+      html { margin-top: 0; }
+      body { position: relative; }
+      :root {
+        --body-background: black;
+        /* --background-color: #003050; */
+        --background-color: #001f3f;
+        --color: floralwhite;
+        /* --color: #FF4136; */
+        --active-color: #FF4136;
+      }
+
+
+
+      #v3 {
+        position: relative;
+        box-sizing: border-box;
+        cursor: none;
+      }
+
+      #v3::before, #v3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 9.7vw;
+        background: var(--body-background);
+        z-index: 10;
+        pointer-events: none;
+      }
+      #v3::before {
+        top: 0;
+      }
+      #v3::after {
+        bottom: 0;
+      }
+
+      .field {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        background-color: var(--background-color);
+        color: var(--color);
+        width: 100vw;
+        text-align: center;
+        height: 50vw;
+        font-size: 43vw;
+        line-height: 1;
+        font-family: "Nunito Sans Variable", "Nunito Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 900;
+        font-style: normal;
+        font-variation-settings:
+          "wdth" 100,
+          "YTLC" 500;
+      }
+
+      .spel {
+        position: absolute;
+        cursor: none;
+        margin: auto;
+        top: 4.7vw;
+        left: 0;
+        right: 0;
+        transition:
+          transform 3000ms, opacity 3000ms, color 3000ms;
+          /* font-weight 3000ms, font-variation-settings 3000ms, letter-spacing 3000ms,  */
+        transform: rotate3d(0,1,0,90deg);
+        opacity: 1;
+        color: var(--color);
+        z-index: 1;
+      }
+
+      .this {
+        letter-spacing: -0.05em;
+      }
+
+      .is {
+        font-weight: 1000;
+        letter-spacing: 0.05em;
+      }
+
+      .my {
+        font-weight: 1000;
+        letter-spacing: 0.05em;
+      }
+
+      .our {
+        font-weight: 1000;
+        letter-spacing: 0.05em;
+      }
+
+      .last {
+        left: -1vw;
+        font-variation-settings:
+          "wdth" 80;
+        letter-spacing: -0.01em;
+      }
+
+      .time {
+        font-variation-settings:
+          "wdth" 92;
+        letter-spacing: -0.05em;
+      }
+
+      .to {
+        font-weight: 1000;
+        letter-spacing: 0.05em;
+      }
+
+      .feel {
+        left: -2vw;
+        font-variation-settings:
+          "wdth" 98;
+        letter-spacing: -0.05em;
+      }
+
+      .hear {
+        left: -1.5vw;
+        font-weight: 800;
+        font-variation-settings:
+          "wdth" 75;
+        letter-spacing: -0.03em;
+      }
+
+      .know {
+        left: -6vw;
+        font-weight: 800;
+        font-variation-settings:
+          "wdth" 75;
+        letter-spacing: -0.15em;
+      }
+
+      .read {
+        left: -0.5vw;
+        font-variation-settings:
+          "wdth" 75;
+        letter-spacing: -0.015em;
+      }
+
+      .say {
+        font-weight: 1000;
+      }
+
+      .see {
+        letter-spacing: 0.05em;
+        font-weight: 1000;
+      }
+
+      .taste {
+        left: -2.5vw;
+        font-weight: 800;
+        font-variation-settings:
+          "wdth" 75;
+        letter-spacing: -0.09em;
+      }
+
+      .touch {
+        left: -6.5vw;
+        font-weight: 700;
+        font-variation-settings:
+          "wdth" 75;
+        letter-spacing: -0.17em;
+      }
+    </style>
+  </head>
+  <body>
+    <main></main>
+  </body>
+</html>
